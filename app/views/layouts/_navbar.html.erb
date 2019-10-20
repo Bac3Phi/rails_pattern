@@ -1,0 +1,24 @@
+<nav class="navbar is-transparent">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="<%= root_path %>">
+        <img src="http://neo-lab.vn/css/img/top/logo.png" width="112" height="28">
+      </a>
+      <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  
+    <div id="navbarExampleTransparentExample" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <p class="control">
+              <%= link_to "Create New Post", new_post_path, class:"navbar-item" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
