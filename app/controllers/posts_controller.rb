@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 	 before_action :find_post, only: [:show, :update, :edit, :destroy]
 
 	def index
-		@posts = Post.all.order("created_at DESC")
+		@posts = PostsQuery.call
 	end
 
 	def new
@@ -11,8 +11,9 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		service = CreatePost.call(@post)
 
-		if @post.save
+		if service.result
 			redirect_to @post
 		else
 			render 'new'
@@ -23,8 +24,9 @@ class PostsController < ApplicationController
 	end
 
 	def update
+		form = PostForm.new(@post, post_params)
 
-		if @post.update(post_params)
+		if form.save
 			redirect_to @post
 		else
 			render 'edit'
@@ -32,11 +34,9 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@post = Post.find(params[:id])
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
 		@post.destroy
 
 		redirect_to posts_path
